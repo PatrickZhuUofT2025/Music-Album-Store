@@ -1,0 +1,98 @@
+-- Most senior employee based on job title? 
+-- Based on this csv file we can just find the highest role 
+-- In a more complicated file, I will need to find which roles are receiving the reports
+-- to narrow the search down
+SELECT title, first_name, last_name
+FROM employee
+WHERE title = 'Senior General Manager';
+-- Countries with the most invoices
+SELECT 
+	billing_country, 
+	COUNT(invoice_id) AS total_invoices,
+	DENSE_RANK() OVER (ORDER BY COUNT(invoice_id) DESC) AS rank
+FROM invoice
+GROUP BY billing_country;
+-- Suppose we want to throw a promotional Music Festival in the city that made the most money
+-- for the store 
+-- Could've just used invoice table, but I will find the total using the invoice_line and
+-- compare it to the total in the invoice table as a double check
+-- If there are any disparities, I won't consider the invoice valid 
+WITH invoice_line_cte AS (
+	SELECT  
+		invoice_id, 
+		SUM(unit_price * quantity) AS total
+	FROM invoice_line
+	GROUP BY invoice_id
+	ORDER BY invoice_id
+),
+promotional_city AS (
+	SELECT 
+		inv.billing_city,
+		SUM(inv.total) AS invoice_total
+	FROM invoice AS inv
+	INNER JOIN invoice_line_cte AS sinv
+		ON inv.invoice_id = sinv.invoice_id
+		AND inv.total = sinv.total
+	GROUP BY inv.billing_city
+	ORDER BY SUM(inv.total) DESC 
+)
+SELECT *
+FROM promotional_city
+WHERE invoice_total = (
+	SELECT MAX(invoice_total)
+	FROM promotional_city
+);
+-- Finding the best customer - the customer that spent the most 
+-- I will use the previous cte, approaching this problem with a similar concept
+-- The return will be the customer information with his/her invoice total
+WITH invoice_line_cte AS (
+	SELECT  
+		invoice_id, 
+		SUM(unit_price * quantity) AS total
+	FROM invoice_line
+	GROUP BY invoice_id
+	ORDER BY invoice_id
+),
+invoice_cte AS (
+	SELECT 
+		inv.customer_id,
+		SUM(inv.total) AS invoice_total
+	FROM invoice AS inv
+	INNER JOIN invoice_line_cte AS sinv
+		ON inv.invoice_id = sinv.invoice_id
+		AND inv.total = sinv.total
+	GROUP BY inv.customer_id
+	ORDER BY SUM(inv.total) DESC 
+),
+customer_cte AS (
+	SELECT *
+	FROM invoice_cte
+	WHERE invoice_total = (
+		SELECT MAX(invoice_total)
+		FROM invoice_cte
+	)
+)
+SELECT 
+	c.customer_id,
+	inv.invoice_total,
+	c.first_name,
+	c.last_name,
+	c.company,
+	c.address,
+	c.city,
+	c.country,
+	c.postal_code,
+	c.phone,
+	c.email,
+	c.support_rep_id
+FROM customer AS c
+INNER JOIN customer_cte AS inv
+	ON c.customer_id = inv.customer_id;
+-- Suppose we wanted to find the top three invoice sales 
+SELECT  
+	invoice_id, 
+	SUM(unit_price * quantity) AS total
+FROM invoice_line
+GROUP BY invoice_id
+ORDER BY invoice_id
+LIMIT 3;
