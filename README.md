@@ -26,3 +26,4 @@ Invoice
 
 I used POSTGRESQL to compete the SQL queries 
 I developed a script to update tables - removing existing tables and create a table with columns, ready to re-import csv files
+Under the SQL Scripts Folder, I added txt files of my SQL coding to make it easier for viewing purposes
