@@ -1,4 +1,5 @@
 This is currently a project in progress.
+
 Google Sheets formulas and functions were utilized to update the Music Store CSV Files. The spreadsheet file does not contain many of the formulas and functions due to the fact that these files 
 had to be reformatted and cleaned to be import-ready into SQL database 
 
