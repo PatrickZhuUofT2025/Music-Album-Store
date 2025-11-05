@@ -26,6 +26,6 @@ Invoice
 - Used conditional formatting to find any duplicates of Ireland in the billing_country column, used Find and Replace to remove Dublin in billing_state column
 - The same process was used for any sheets containing a billing_state
 
-I used POSTGRESQL to compete the SQL queries 
+I used POSTGRESQL to compete the SQL queries. Some of the functions used: cte queries, subqueries, inner joins, aggregate functions, Group By, Order By.
 I developed a script to update tables - removing existing tables and create a table with columns, ready to re-import csv files
 Under the SQL Scripts Folder, I added txt files of my SQL coding to make it easier for viewing purposes
