@@ -29,3 +29,5 @@ Invoice
 I used POSTGRESQL to compete the SQL queries. Some of the functions used: cte queries, subqueries, inner joins, aggregate functions, Group By, Order By.
 I developed a script to update tables - removing existing tables and create a table with columns, ready to re-import csv files
 Under the SQL Scripts Folder, I added txt files of my SQL coding to make it easier for viewing purposes
+
+The pbix file is a file from PowerBI desktop. The dashboard is a visualization of the SQL query returns. The SQL data into PowerBI utilized the Direct Query method. Real time updates will occur once tables updated. I plan to add additional data to the relevant SQL tables to test whether the update occurs. 
