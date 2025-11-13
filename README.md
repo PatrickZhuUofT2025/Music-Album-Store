@@ -1,5 +1,3 @@
-This is currently a project in progress.
-
 Google Sheets formulas and functions were utilized to update the Music Store CSV Files. The spreadsheet file does not contain many of the formulas and functions due to the fact that these files 
 had to be reformatted and cleaned to be import-ready into SQL database 
 
@@ -30,4 +28,6 @@ I used POSTGRESQL to compete the SQL queries. Some of the functions used: cte qu
 I developed a script to update tables - removing existing tables and create a table with columns, ready to re-import csv files
 Under the SQL Scripts Folder, I added txt files of my SQL coding to make it easier for viewing purposes
 
-The pbix file is a file from PowerBI desktop. It is not published to Power BI service because I do not want to pay for the pricing plan at the moment. The dashboard is a visualization of the SQL query returns. The SQL data into PowerBI utilized the Direct Query method. Real time updates will occur once tables updated. I plan to add additional data to the relevant SQL tables to test whether the update occurs. 
+Two screenshots were taken of the Power BI dashboard. It is not published to Power BI service because I do not want to pay for the pricing plan at the moment. The dashboard is a visualization of the SQL query returns. The SQL data into PowerBI utilized the Direct Query method. Real time updates will occur once tables in the SQL database are updated. The first screenshot shows the original returns from the SQL query. In the second screenshot, you'll notice that the billing city with the highest invoice total has changed to Mountain Views. 
+
+My own thoughts: It is pretty cool how I can visualize SQL returns differently using Power BI and the returns will update using the Direct Query Method. It is my first time using Power BI and it's awesome.
